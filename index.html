@@ -99,14 +99,15 @@
           drawImageIOSFix(context2,img, 0, 0, img.naturalWidth, img.naturalHeight, 0, 0, 600, 500); /* This code draws the image onto the second canvas */
           blueScale(); /* I called on my blueScale() function that turns the picture blue */
           /*  +++++++++++++++ BEGIN IMAGE PROCESSING +++++++++++++++ */
-          /* Goal: apply a function onto img in order to change img into a blue-scale version */
+          /* Goal: apply a function blueScale() onto the image from context2 in order to alter all the pixels of the image into a blue-scale version */
           function blueScale() {
-            var imageData2 = context2.getImageData(0,0, canvas.width, canvas.height);
-            var data = imageData2.data;
-            for (var i=0; i < data.length; i += 4) {
-              var red = data[i];
-              var green = data[i + 1];
-              var blue = data[i + 2];
+            var imageData2 = context2.getImageData(0,0, canvas.width, canvas.height); /* getting the image data array from context2 and assigning it to imageData. The arguments include the starting pixels (0,0) and ending pixels (canvas.width, canvas.height) */
+            var data = imageData2.data; /* placing the data array collected from imageData2 into a variable named "data" */
+            for (var i=0; i < data.length; i += 4) { /* using a for loop in order to access every pixel */
+              /* the three lines of code below are used to translate "the computer terms" of red, green, and blue into English terms. i represents the index of the current pixel in the array. */
+              var red = data[i]; /* Each pixel's data consists of four consecutive values in the array: red, green, blue, and alpha. Since red is the first value, we access the red color through data[i] */ 
+              var green = data[i + 1]; /* Since green is the second value for a pixel's data, we access the green pixel via data[i+1] */
+              var blue = data[i + 2]; /* Since blue is the third value for a pixel's data, we access the blue pixel via data[i+2] */
 
               /* Highlighting the blue pixels */
               var blueScaleValue = (red + green + blue) / 3 /* calculating the average brightness */
