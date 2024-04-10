@@ -96,9 +96,32 @@
           /*This finally draws the image onto the first drawing canvas. The specific canvas is referred to by "context". This is established down in the HTML part of the file just under the first <canvas> tag. If we weren't worried about fixing an iPhone bug we would use context.drawImage(image, 0, 0, img.naturalWidth, img.naturalHeight, 0, 0, 600, 500) instead of drawImageIOSFix */
         
           drawImageIOSFix(context,img, 0, 0, img.naturalWidth, img.naturalHeight, 0, 0, 600, 500);
-
+          drawImageIOSFix(context2,img, 0, 0, img.naturalWidth, img.naturalHeight, 0, 0, 600, 500); /* This code draws the image onto the second canvas */
+          blueScale(); /* I called on my blueScale() function that turns the picture blue */
           /*  +++++++++++++++ BEGIN IMAGE PROCESSING +++++++++++++++ */
+          /* Goal: apply a function onto img in order to change img into a blue-scale version */
+          function blueScale() {
+            var imageData2 = context2.getImageData(0,0, canvas.width, canvas.height);
+            var data = imageData2.data;
+            for (var i=0; i < data.length; i += 4) {
+              var red = data[i];
+              var green = data[i + 1];
+              var blue = data[i + 2];
+
+              /* Highlighting the blue pixels */
+              var blueScaleValue = (red + green + blue) / 3 /* calculating the average brightness */
+              data[i] = 0 /* setting the red pixels to 0 */
+              data[i+1] = 0 /* setting the green pixels to 0 */
+              data[i+2] = blueScaleValue /* setting the blue channel to the average brightness */
+
+            };
+            context2.putImageData(imageData2, 0, 0);
+
+          }
+
+
           /*  ++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+          
 
           /* PUT ANY CHANGES TO THE JAVASCRIPT HERE  */
           
