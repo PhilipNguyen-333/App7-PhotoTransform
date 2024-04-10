@@ -96,12 +96,16 @@
           /*This finally draws the image onto the first drawing canvas. The specific canvas is referred to by "context". This is established down in the HTML part of the file just under the first <canvas> tag. If we weren't worried about fixing an iPhone bug we would use context.drawImage(image, 0, 0, img.naturalWidth, img.naturalHeight, 0, 0, 600, 500) instead of drawImageIOSFix */
         
           drawImageIOSFix(context,img, 0, 0, img.naturalWidth, img.naturalHeight, 0, 0, 600, 500);
+          
+          /*  +++++++++++++++ BEGIN IMAGE PROCESSING +++++++++++++++ */
           drawImageIOSFix(context2,img, 0, 0, img.naturalWidth, img.naturalHeight, 0, 0, 600, 500); /* This code draws the image onto the second canvas */
           blueScale(); /* I called on my blueScale() function that turns the picture blue */
-          /*  +++++++++++++++ BEGIN IMAGE PROCESSING +++++++++++++++ */
+
+          /*  ++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+          /* PUT ANY CHANGES TO THE JAVASCRIPT HERE  */
           /* Goal: apply a function blueScale() onto the image from context2 in order to alter all the pixels of the image into a blue-scale version */
           function blueScale() {
-            var imageData2 = context2.getImageData(0,0, canvas.width, canvas.height); /* getting the image data array from context2 and assigning it to imageData. The arguments include the starting pixels (0,0) and ending pixels (canvas.width, canvas.height) */
+            var imageData2 = context2.getImageData(0,0, canvas.width, canvas.height); /* getting the image data array from context2 and assigning it to imageData. */
             var data = imageData2.data; /* placing the data array collected from imageData2 into a variable named "data" */
             for (var i=0; i < data.length; i += 4) { /* using a for loop in order to access every pixel */
               /* the three lines of code below are used to translate "the computer terms" of red, green, and blue into English terms. i represents the index of the current pixel in the array. */
@@ -116,19 +120,9 @@
               data[i+2] = blueScaleValue /* setting the blue channel to the average brightness */
 
             };
-            context2.putImageData(imageData2, 0, 0);
+            context2.putImageData(imageData2, 0, 0); /* the modified image data (pixel colors) is put back onto the canvas using "putImageData" */
 
           }
-
-
-          /*  ++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-          
-
-          /* PUT ANY CHANGES TO THE JAVASCRIPT HERE  */
-          
-          
-          
-          
         } // end of img.onload
         
         img.src = reader.result;
@@ -162,17 +156,17 @@
       <script> /* This script initiates the canvas and puts the text on the canvas "myCanvas" */
         var canvas = document.getElementById('myCanvas'); /* placing myCanvas into a variable called canvas */
         var context = canvas.getContext("2d"); /* these next four lines are used to write text on myCanvas */
-        context.font = '20pt Calibri';
-        context.fillStyle = "black";
-        context.fillText("Original image will go here", 10, 20);
+        context.font = '20pt Calibri'; /* decides the font of the text */
+        context.fillStyle = "black"; // decides text color
+        context.fillText("Original image will go here", 10, 20); // the words that the text displays
       </script>
       <canvas id="myCanvas2" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas> <!--Creating the second canvas-->
       <script> /* This script initiates the second canvas and puts the text on the canvas "myCanvas2" */
         var canvas2 = document.getElementById('myCanvas2'); /* placing myCanvas2 into a variable called canvas2 */
         var context2 = canvas2.getContext("2d"); /* these next four lines are used to write text on myCanvas2 */
-        context2.font = '20pt Calibri'; 
-        context2.fillStyle = "black";
-        context2.fillText("Altered image will go here", 10, 20);
+        context2.font = '20pt Calibri'; // decides the font of the text
+        context2.fillStyle = "black";//decides text color
+        context2.fillText("Altered image will go here", 10, 20); // decides the words that the text displays
       </script>
 
 
