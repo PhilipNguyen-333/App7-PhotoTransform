@@ -27,7 +27,7 @@
   The goal of the code is to have the user load an image onto a canvas, then display the original image on one canvas as well as display a blue version of the image on the second canvas.
  
   Known Issues:
-  blah, blah, blah, blah
+  The text in the second canvas has the first letter partially erased. Specifically, the word "Altered" in "Altered image will go here" is partially smudged.
 -->
 
  <head>
@@ -103,7 +103,7 @@
 
           /*  ++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
           /* PUT ANY CHANGES TO THE JAVASCRIPT HERE  */
-          /* Goal: apply a function blueScale() onto the image from context2 in order to alter all the pixels of the image into a blue-scale version */
+          /* Goal: create a javascript function blueScale() which alters all the pixels of the image into a blue-scale version */
           function blueScale() {
             var imageData2 = context2.getImageData(0,0, canvas.width, canvas.height); /* getting the image data array from context2 and assigning it to imageData. */
             var data = imageData2.data; /* placing the data array collected from imageData2 into a variable named "data" */
@@ -143,11 +143,11 @@
  <body>
   <div data-role="page">
     <div data-role="header">
-    <h1>Primary Colors</h1></div><!-- /header -->
+    <h1>Making Your Image Blue!</h1></div><!-- /header -->
     <div data-role="content">	
       <h2>Push button to take picture.</h2>
       <div>
-        Press orange button to create or choose image file:
+        Greetings! Press on the orange button to create or choose image file. Once the file is uploaded, you will see the image in its regular form and a copy of that image in its blue-scaled form.
         <input type="file" id="fileInput" STYLE="background-color: #FF6600;">
       </div>
       <div id="messageDisplayArea"></div>
